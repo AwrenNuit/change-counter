@@ -2,7 +2,7 @@ const pg = require(`pg`);
 const Pool = pg.Pool;
 
 const config = {
-  database: ``,
+  database: `change_counter`,
   host: `localhost`,
   port: 5432,
   max: 10,
