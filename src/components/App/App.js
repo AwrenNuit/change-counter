@@ -14,20 +14,37 @@ class App extends Component {
     this.getChange();
   }
 
-  getChange = () =>{
-    axios.get(`/change`)
+  addChange = (name) =>{
+    axios.post(`/change/${name}`)
     .then(response=>{
-      this.setState({
-        changeList: response.data
-      });
+      this.getChange();
     }).catch(error=>{
     alert(`something went wrong`);
     console.log(error);
     });
   }
 
-  showChange = () =>{
+  getChange = () =>{
+    axios.get(`/change`)
+    .then(response=>{
+      this.setState({
+        changeList: response.data
+      });
+      console.log('changeList:', this.state.changeList);
+    }).catch(error=>{
+    alert(`something went wrong`);
+    console.log(error);
+    });
+  }
 
+  resetTotal = () =>{
+    axios.post(`/change/reset`)
+    .then(response=>{
+      this.getChange();
+    }).catch(error=>{
+    alert(`something went wrong`);
+    console.log(error);
+    });
   }
 
   render(){
@@ -35,7 +52,7 @@ class App extends Component {
       <>
         <div className="App">
           <Header />
-          <ChangeList list={this.state.changeList} showChange={this.showChange} />
+          <ChangeList list={this.state.changeList} addChange={this.addChange} resetTotal={this.resetTotal} />
         </div>
       </>
     )

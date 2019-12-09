@@ -12,5 +12,16 @@ route.get(`/`, (req, res)=>{
   })
 })
 
+route.post(`/:name`, (req, res)=>{
+  let SQLquery = `UPDATE change SET quantity=quantity+1 WHERE name=$1;`;
+  pool.query(SQLquery, [req.params.name])
+  .then(result=>{
+    res.send(201);
+  }).catch(error=>{
+    console.log('ERROR POSTING CHANGE ------------------------>', error);
+    res.sendStatus(500);
+  })
+})
+
 module.exports = route;
 
