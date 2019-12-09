@@ -30,7 +30,6 @@ class App extends Component {
       this.setState({
         changeList: response.data
       });
-      console.log('changeList:', this.state.changeList);
     }).catch(error=>{
     alert(`something went wrong`);
     console.log(error);
@@ -38,7 +37,6 @@ class App extends Component {
   }
 
   resetTotal = () =>{
-    console.log('in reset');
     axios.put(`/change/reset`)
     .then(response=>{
       this.getChange();

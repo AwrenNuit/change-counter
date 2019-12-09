@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .App-header {
@@ -25,7 +27,7 @@
   width: 100px;
   height: 100px;
   border: 2px solid black;
-  box-shadow: 10px 10px 5px #666;
+  /* box-shadow: 10px 10px 5px #666; */
 }
 
 .bill {
@@ -37,6 +39,14 @@
   height: 100px;
   border: 2px solid black;
   /* box-shadow: 10px 10px 5px #666; */
+}
+
+.main-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .row {
@@ -56,4 +66,9 @@
   text-align: center;
   align-items: center;
   border: 5px solid black;
+}
+
+.inputs {
+  font-size: 60px;
+  width: 85px;
 }

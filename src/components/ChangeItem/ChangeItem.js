@@ -14,7 +14,7 @@ class ChangeItem extends Component {
               <div className={this.props.change.class} style={{backgroundImage: `url(${this.props.change.path})`}}></div>
             </div>
             <div className="col">
-              <input type="number" onChange={()=>this.setChange(this.props.change.name)} value={this.props.change.quantity} placeholder="how many?" />
+              <input className="inputs" type="number" onChange={()=>this.setChange(this.props.change.name)} value={this.props.change.quantity} placeholder="how many?" />
             </div>
           </div>
         </div>
