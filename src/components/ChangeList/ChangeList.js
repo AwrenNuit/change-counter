@@ -34,7 +34,7 @@ class ChangeList extends Component {
         <form onSubmit={(event)=>this.displayTotal(event)}>
           <div className="main-div">
             {this.props.list.map((change, i)=>
-              <ChangeItem change={change} key={i} i={i} addChange={this.props.addChange} />
+              <ChangeItem change={change} key={i} i={i} addChange={this.props.addChange} resetCount={this.props.resetCount} />
             )}
           </div>
           <button type="submit">Add My Change!</button>

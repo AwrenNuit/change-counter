@@ -1,7 +1,5 @@
 .App {
   text-align: center;
-  align-items: center;
-  justify-content: center;
 }
 
 .App-header {
@@ -61,7 +59,19 @@
   flex-direction: column;
   flex-basis: 100%;
   flex: 1;
-  height: 110px;
+  height: 100px;
+  width: 250px;
+  text-align: center;
+  align-items: center;
+  border: 5px solid black;
+}
+
+.dbl-col {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 2;
+  height: 100px;
   width: 250px;
   text-align: center;
   align-items: center;
@@ -69,6 +79,6 @@
 }
 
 .inputs {
-  font-size: 60px;
-  width: 85px;
+  font-size: 78px;
+  width: 105px;
 }

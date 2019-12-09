@@ -36,6 +36,16 @@ class App extends Component {
     });
   }
 
+  resetCount = (id) =>{
+    axios.put(`/change/reset/${id}`)
+    .then(response=>{
+      this.getChange();
+    }).catch(error=>{
+    alert(`something went wrong`);
+    console.log(error);
+    });
+  }
+
   resetTotal = () =>{
     axios.put(`/change/reset`)
     .then(response=>{
@@ -51,7 +61,7 @@ class App extends Component {
       <>
         <div className="App">
           <Header />
-          <ChangeList list={this.state.changeList} addChange={this.addChange} resetTotal={this.resetTotal} />
+          <ChangeList list={this.state.changeList} addChange={this.addChange} resetCount={this.resetCount} resetTotal={this.resetTotal} />
         </div>
       </>
     )
