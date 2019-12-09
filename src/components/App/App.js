@@ -38,7 +38,8 @@ class App extends Component {
   }
 
   resetTotal = () =>{
-    axios.post(`/change/reset`)
+    console.log('in reset');
+    axios.put(`/change/reset`)
     .then(response=>{
       this.getChange();
     }).catch(error=>{

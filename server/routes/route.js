@@ -23,5 +23,17 @@ route.post(`/:name`, (req, res)=>{
   })
 })
 
+route.put(`/reset`, (req, res)=>{
+  console.log('in post');
+  let SQLquery = `UPDATE change SET quantity=0;`;
+  pool.query(SQLquery)
+  .then(result=>{
+    res.send(201);
+  }).catch(error=>{
+    console.log('ERROR RESETTING CHANGE ------------------------>', error);
+    res.sendStatus(500);
+  })
+})
+
 module.exports = route;
 
