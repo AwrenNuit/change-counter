@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import '../App/App.css';
 import Header from '../Header/Header';
-import DataEntry from '../DataEntry/DataEntry';
+import ChangeList from '../ChangeList/ChangeList';
 
 class App extends Component {
 
@@ -26,12 +26,16 @@ class App extends Component {
     });
   }
 
+  showChange = () =>{
+
+  }
+
   render(){
     return (
       <>
         <div className="App">
           <Header />
-          <DataEntry list={this.state.changeList} />
+          <ChangeList list={this.state.changeList} showChange={this.showChange} />
         </div>
       </>
     )
