@@ -1,7 +1,7 @@
-const route = require(`express`).Router();
+const router = require(`express`).Router();
 const pool = require(`../modules/pool`);
 
-route.get(`/`, (req, res)=>{
+router.get(`/`, (req, res)=>{
   let SQLquery = `SELECT * FROM change ORDER BY id;`;
   pool.query(SQLquery)
   .then(result=>{
@@ -12,7 +12,7 @@ route.get(`/`, (req, res)=>{
   })
 })
 
-route.post(`/:name/:id`, (req, res)=>{
+router.post(`/:name/:id`, (req, res)=>{
   let SQLquery = `UPDATE change SET quantity=$1 WHERE name=$2;`;
   pool.query(SQLquery, [req.params.id, req.params.name])
   .then(result=>{
@@ -23,7 +23,7 @@ route.post(`/:name/:id`, (req, res)=>{
   })
 })
 
-route.put(`/reset/:id`, (req, res)=>{
+router.put(`/reset/:id`, (req, res)=>{
   let SQLquery = `UPDATE change SET quantity=0 WHERE id=$1;`;
   pool.query(SQLquery, [req.params.id])
   .then(result=>{
@@ -34,7 +34,7 @@ route.put(`/reset/:id`, (req, res)=>{
   })
 })
 
-route.put(`/reset`, (req, res)=>{
+router.put(`/reset`, (req, res)=>{
   let SQLquery = `UPDATE change SET quantity=0;`;
   pool.query(SQLquery)
   .then(result=>{
@@ -45,5 +45,5 @@ route.put(`/reset`, (req, res)=>{
   })
 })
 
-module.exports = route;
+module.exports = router;
 
