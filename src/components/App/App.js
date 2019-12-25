@@ -14,8 +14,8 @@ class App extends Component {
     this.getChange();
   }
 
-  addChange = (name) =>{
-    axios.post(`/change/${name}`)
+  addChange = (name, id) =>{
+    axios.post(`/change/${name}/${id}`)
     .then(response=>{
       this.getChange();
     }).catch(error=>{

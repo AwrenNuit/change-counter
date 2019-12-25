@@ -12,9 +12,9 @@ route.get(`/`, (req, res)=>{
   })
 })
 
-route.post(`/:name`, (req, res)=>{
-  let SQLquery = `UPDATE change SET quantity=quantity+1 WHERE name=$1;`;
-  pool.query(SQLquery, [req.params.name])
+route.post(`/:name/:id`, (req, res)=>{
+  let SQLquery = `UPDATE change SET quantity=$1 WHERE name=$2;`;
+  pool.query(SQLquery, [req.params.id, req.params.name])
   .then(result=>{
     res.send(201);
   }).catch(error=>{

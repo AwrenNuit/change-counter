@@ -2,8 +2,19 @@ import React, { Component } from 'react';
 
 class ChangeItem extends Component {
 
-  setChange = (name) =>{
-    this.props.addChange(name)  
+  state = {
+    count: 0
+  }
+
+  setChange = (name, event) =>{
+    this.setState({
+      count: event.target.value
+    });
+    this.sendChange(name);
+  }
+
+  sendChange = (name) =>{
+    this.props.addChange(name, this.state.count)  ;
   }
 
   reset = (event, id) =>{
@@ -19,7 +30,7 @@ class ChangeItem extends Component {
               <div className={this.props.change.class} style={{backgroundImage: `url(${this.props.change.path})`}}></div>
             </div>
             <div className="col">
-              <input className="inputs" type="number" onChange={()=>this.setChange(this.props.change.name)} value={this.props.change.quantity} placeholder="how many?" />
+              <input className="inputs" type="number" onChange={(event)=>this.setChange(this.props.change.name, event)} value={this.state.count} placeholder="how many?" />
             </div>
             <div className="col">
               <button onClick={(event)=>this.reset(event, this.props.change.id)}>Reset</button>

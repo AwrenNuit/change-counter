@@ -9,6 +9,7 @@ class ChangeList extends Component {
 
   addChange = () =>{
     let amount = 0;
+    //ADD FOR LOOP HERE /////////////////////////////////////////////////////////////
     amount += this.props.list[0].quantity * .01
     amount += this.props.list[1].quantity * .05
     amount += this.props.list[2].quantity * .1
