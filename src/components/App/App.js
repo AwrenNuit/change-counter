@@ -6,22 +6,6 @@ import ChangeList from '../ChangeList/ChangeList';
 
 class App extends Component {
 
-  componentDidMount = () =>{
-    this.getChange();
-  }
-
-  getChange = () =>{
-    axios.get(`/change`)
-    .then(response=>{
-      this.setState({
-        changeList: response.data
-      });
-    }).catch(error=>{
-    alert(`something went wrong`);
-    console.log(error);
-    });
-  }
-
   resetTotal = () =>{
     axios.put(`/change/reset`)
     .then(response=>{

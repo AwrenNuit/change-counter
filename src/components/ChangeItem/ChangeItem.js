@@ -7,6 +7,10 @@ class ChangeItem extends Component {
     qty: 0
   }
 
+  componentDidMount = () =>{
+    this.props.dispatch({type: `GET_CHANGE`});
+  }
+
   setChange = (event, name) =>{
     this.setState({
       qty: event.target.value
