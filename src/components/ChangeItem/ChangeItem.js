@@ -11,29 +11,35 @@ class ChangeItem extends Component {
     oneDollar: 0,
     fiveDollar: 0,
     tenDollar: 0,
-    twentyDollar: 0
+    twentyDollar: 0,
+    lastChanged: ''
   }
 
-  UNSAFE_componentWillMount(){
+  componentDidMount(){
     this.props.dispatch({type: `GET_CHANGE`});
   }
 
-  componentDidUpdate(){
-    this.sendChange();
-  }
+  // componentDidUpdate(){
+  //   this.sendChange();
+  // }
 
   // Set state to current input value
   setChange = (event, name) =>{
+    if(event.target.value < 0 || isNaN(event.target.value)){ // isNan still allows non-number inputs - fix this
+      event.target.value = 0;
+    }
+    else if(event.target.value > 99){
+      event.target.value = 99;
+    }
     this.setState({
-      [name]: event.target.value
+      [name]: event.target.value,
+      lastChanged: name
     });
   }
 
   // Dispatch each update to database
   sendChange = () =>{
-    console.log('in sendChange with:', this.props.reduxState.name, this.state);
-    let dataToSend = {name: this.props.reduxState.name, qty: this.state};
-    console.log('dataToSend:', dataToSend);
+    let dataToSend = {name: this.state.lastChanged, qty: this.state[this.state.lastChanged]};
     this.props.dispatch({type: `UPDATE_CHANGE`, payload: dataToSend});
   }
 
@@ -47,7 +53,6 @@ class ChangeItem extends Component {
     return(
       <>
       {JSON.stringify(this.state)}
-      {JSON.stringify(this.props.reduxState)}
 
         {this.props.reduxState.map((change, i)=>
           <div key={i}>
@@ -56,7 +61,7 @@ class ChangeItem extends Component {
                 <div className={change.class} style={{backgroundImage: `url(${change.path})`}}></div>
               </div>
               <div className="col">
-                <input className="inputs" type="number" min="0" max="99" onChange={(event)=>this.setChange(event, change.name)}  />
+                <input className="inputs" type="number" onChange={(event)=>this.setChange(event, change.name)} value={this.state[change.name]} />
               </div>
               <div className="col">
                 <button onClick={(event)=>this.reset(event, change.id)}>Reset</button>
