@@ -8,7 +8,7 @@ import {combineReducers, createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
-import {takeEvery} from 'redux-saga/effects';
+import {put, takeEvery} from 'redux-saga/effects';
 
 function* watcherSaga(){
   yield takeEvery(`GET_CHANGE`, getChangeSaga);
@@ -17,6 +17,7 @@ function* watcherSaga(){
   yield takeEvery(`UPDATE_CHANGE`, updateChangeSaga);
 }
 
+// GET all database data, send to reducer
 function* getChangeSaga(){
   try{
     let getResponse = yield axios.get(`/change`);
@@ -27,6 +28,7 @@ function* getChangeSaga(){
   }
 }
 
+// Reset all coin/bill quantities
 function* resetAllQtySaga(){
   try {
     yield axios.put(`/change/reset`);
@@ -36,9 +38,10 @@ function* resetAllQtySaga(){
   }
 }
 
+// Reset individual coin/bill quantity
 function* resetQtySaga(action){
   try {
-    let id = action.payload.id;
+    let id = action.payload;
     yield axios.put(`/change/reset/${id}`);
     yield put({type: `GET_CHANGE`});
   } catch (error) {
@@ -47,6 +50,7 @@ function* resetQtySaga(action){
 }
 
 function* updateChangeSaga(action){
+  console.log('UPDATE saga with:', action.payload);
   try{
     let name = action.payload.name
     let qty = action.payload.qty
@@ -58,6 +62,7 @@ function* updateChangeSaga(action){
   }
 }
 
+// Store all database data
 const changeReducer = (state=[], action)=>{
   if(action.type === `SEND_CHANGE`){
     return action.payload;
@@ -71,7 +76,7 @@ const storeInstance = createStore(
   combineReducers({
       changeReducer
   }),
-  applyMiddleware(sagaMiddleWare, logger)
+  applyMiddleware(sagaMiddleware, logger)
 );
 
 sagaMiddleware.run(watcherSaga);

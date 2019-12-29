@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ChangeItem from '../ChangeItem/ChangeItem';
+import {connect} from 'react-redux';
 
 class ChangeList extends Component {
 
@@ -7,6 +8,7 @@ class ChangeList extends Component {
     total: 0
   }
 
+  // Add all change together, fix to second decimal
   addChange = () =>{
     let amount = 0;
     amount += this.props.list[0].quantity * .01
@@ -22,6 +24,7 @@ class ChangeList extends Component {
     })
   }
 
+  // Display total change, reset all input values
   displayTotal = (event) =>{
     event.preventDefault();
     this.addChange();
@@ -43,4 +46,4 @@ class ChangeList extends Component {
   }
 }
 
-export default ChangeList;
+export default connect()(ChangeList);

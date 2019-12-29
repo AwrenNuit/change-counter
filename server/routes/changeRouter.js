@@ -13,6 +13,7 @@ router.get(`/`, (req, res)=>{
 });
 
 router.put(`/:name/:id`, (req, res)=>{
+  console.log('in UPDATE with:', req.params);
   let SQLquery = `UPDATE change SET quantity=$1 WHERE name=$2;`;
   pool.query(SQLquery, [req.params.id, req.params.name])
   .then(result=>{

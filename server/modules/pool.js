@@ -1,6 +1,6 @@
 const pg = require('pg');
 const url = require('url');
-const config = {};
+let config = {};
 
 if(process.env.DATABASE_URL){
   const params = url.parse(process.env.DATABASE_URL);
