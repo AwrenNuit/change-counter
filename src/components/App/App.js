@@ -5,23 +5,9 @@ import Header from '../Header/Header';
 import ChangeList from '../ChangeList/ChangeList';
 
 class App extends Component {
-
-  state = {
-    changeList: []
-  }
-
+  
   componentDidMount = () =>{
     this.getChange();
-  }
-
-  addChange = (name, id) =>{
-    axios.post(`/change/${name}/${id}`)
-    .then(response=>{
-      this.getChange();
-    }).catch(error=>{
-    alert(`something went wrong`);
-    console.log(error);
-    });
   }
 
   getChange = () =>{

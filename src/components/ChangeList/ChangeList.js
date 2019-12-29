@@ -9,7 +9,6 @@ class ChangeList extends Component {
 
   addChange = () =>{
     let amount = 0;
-    //ADD FOR LOOP HERE /////////////////////////////////////////////////////////////
     amount += this.props.list[0].quantity * .01
     amount += this.props.list[1].quantity * .05
     amount += this.props.list[2].quantity * .1
@@ -32,11 +31,9 @@ class ChangeList extends Component {
   render(){
     return (
       <>
-        <form onSubmit={(event)=>this.displayTotal(event)}>
+        <form onSubmit={()=>this.displayTotal()}>
           <div className="main-div">
-            {this.props.list.map((change, i)=>
-              <ChangeItem change={change} key={i} i={i} addChange={this.props.addChange} resetCount={this.props.resetCount} />
-            )}
+            <ChangeItem />
           </div>
           <button type="submit">Add My Change!</button>
         </form>

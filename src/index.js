@@ -11,22 +11,34 @@ import createSagaMiddleware from 'redux-saga';
 import {takeEvery} from 'redux-saga/effects';
 
 function* watcherSaga(){
-  yield takeEvery(`GET_CHANGE_PICS`, getChangePicsSaga);
-  yield takeEvery(`POST_CHANGE`, postChangeSaga);
+  yield takeEvery(`GET_CHANGE`, getChangeSaga);
+  yield takeEvery(`UPDATE_CHANGE`, updateChangeSaga);
 }
 
-function* getChangePicsSaga(){
+function* getChangeSaga(){
   try{
     let getResponse = yield axios.get(`/change`);
-    yield put({type:`SEND_CHANGE_PICS`, payload: getResponse.data});
+    yield put({type:`SEND_CHANGE`, payload: getResponse.data});
   }
   catch(error){
-    console.log('Error in GET change pics:', error);
+    console.log('Error in GET change:', error);
   }
 }
 
-const changePicsReducer = (state=[], action)=>{
-  if(action.type === `SEND_CHANGE_PICS`){
+function* updateChangeSaga(action){
+  try{
+    let name = action.payload.name
+    let qty = action.payload.qty
+    yield axios.put(`/change/${name}/${qty}`);
+    yield put({type: `GET_CHANGE`});
+  }
+  catch(error){
+    console.log('Error updating change:', error);
+  }
+}
+
+const changeReducer = (state=[], action)=>{
+  if(action.type === `SEND_CHANGE`){
     return action.payload;
   }
   return state;
@@ -36,7 +48,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const storeInstance = createStore(
   combineReducers({
-      changePicsReducer
+      changeReducer
   }),
   applyMiddleware(sagaMiddleWare, logger)
 );
