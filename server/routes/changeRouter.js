@@ -9,19 +9,19 @@ router.get(`/`, (req, res)=>{
   }).catch(error=>{
     console.log('ERROR GETTING CHANGE ------------------------>', error);
     res.sendStatus(500);
-  })
-})
+  });
+});
 
-router.post(`/:name/:id`, (req, res)=>{
+router.put(`/:name/:id`, (req, res)=>{
   let SQLquery = `UPDATE change SET quantity=$1 WHERE name=$2;`;
   pool.query(SQLquery, [req.params.id, req.params.name])
   .then(result=>{
     res.send(201);
   }).catch(error=>{
-    console.log('ERROR POSTING CHANGE ------------------------>', error);
+    console.log('ERROR UPDATING CHANGE ------------------------>', error);
     res.sendStatus(500);
-  })
-})
+  });
+});
 
 router.put(`/reset/:id`, (req, res)=>{
   let SQLquery = `UPDATE change SET quantity=0 WHERE id=$1;`;
@@ -31,8 +31,8 @@ router.put(`/reset/:id`, (req, res)=>{
   }).catch(error=>{
     console.log('ERROR RESETTING THIS CHANGE ------------------------>', error);
     res.sendStatus(500);
-  })
-})
+  });
+});
 
 router.put(`/reset`, (req, res)=>{
   let SQLquery = `UPDATE change SET quantity=0;`;
@@ -40,10 +40,10 @@ router.put(`/reset`, (req, res)=>{
   .then(result=>{
     res.send(201);
   }).catch(error=>{
-    console.log('ERROR RESETTING CHANGE ------------------------>', error);
+    console.log('ERROR RESETTING ALL CHANGE ------------------------>', error);
     res.sendStatus(500);
-  })
-})
+  });
+});
 
 module.exports = router;
 
