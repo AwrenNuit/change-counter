@@ -25,7 +25,7 @@ class ChangeList extends Component {
   displayTotal = (event) =>{
     event.preventDefault();
     this.addChange();
-    this.props.resetTotal();
+    this.props.dispatch({type: `RESET_ALL_QTY`});
   }
 
   render(){
