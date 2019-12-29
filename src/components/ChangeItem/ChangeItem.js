@@ -21,7 +21,7 @@ class ChangeItem extends Component {
 
   reset = (event, id) =>{
     event.preventDefault();
-    this.props.resetCount(id);
+    this.props.dispatch({type: `RESET_QTY`, payload: id});
   }
 
   render(){

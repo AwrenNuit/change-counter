@@ -5,7 +5,7 @@ import Header from '../Header/Header';
 import ChangeList from '../ChangeList/ChangeList';
 
 class App extends Component {
-  
+
   componentDidMount = () =>{
     this.getChange();
   }
@@ -16,16 +16,6 @@ class App extends Component {
       this.setState({
         changeList: response.data
       });
-    }).catch(error=>{
-    alert(`something went wrong`);
-    console.log(error);
-    });
-  }
-
-  resetCount = (id) =>{
-    axios.put(`/change/reset/${id}`)
-    .then(response=>{
-      this.getChange();
     }).catch(error=>{
     alert(`something went wrong`);
     console.log(error);

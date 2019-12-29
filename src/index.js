@@ -12,6 +12,7 @@ import {takeEvery} from 'redux-saga/effects';
 
 function* watcherSaga(){
   yield takeEvery(`GET_CHANGE`, getChangeSaga);
+  yield takeEvery(`RESET_QTY`, resetQtySaga);
   yield takeEvery(`UPDATE_CHANGE`, updateChangeSaga);
 }
 
@@ -22,6 +23,16 @@ function* getChangeSaga(){
   }
   catch(error){
     console.log('Error in GET change:', error);
+  }
+}
+
+function* resetQtySaga(action){
+  try {
+    let id = action.payload.id;
+    yield axios.put(`/change/reset/${id}`);
+    yield put({type: `GET_CHANGE`});
+  } catch (error) {
+    console.log('Error resetting quantity:', error);
   }
 }
 
