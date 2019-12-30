@@ -19,12 +19,13 @@ class ChangeItem extends Component {
     this.props.dispatch({type: `GET_CHANGE`});
   }
 
-  // componentDidUpdate(){
-  //   this.sendChange();
-  // }
+  addQty = (event, id) => {
+    event.preventDefault();
+    this.sendChange();
+  }
 
   // Set state to current input value
-  setChange = (event, name) =>{
+  setChange = (event, name) => {
     if(event.target.value < 0 || isNaN(event.target.value)){ // isNan still allows non-number inputs - fix this
       event.target.value = 0;
     }
@@ -38,13 +39,13 @@ class ChangeItem extends Component {
   }
 
   // Dispatch each update to database
-  sendChange = () =>{
+  sendChange = () => {
     let dataToSend = {name: this.state.lastChanged, qty: this.state[this.state.lastChanged]};
     this.props.dispatch({type: `UPDATE_CHANGE`, payload: dataToSend});
   }
 
   // Reset individual input value
-  reset = (event, id) =>{
+  reset = (event, id) => {
     event.preventDefault();
     this.props.dispatch({type: `RESET_QTY`, payload: id});
   }
@@ -62,6 +63,9 @@ class ChangeItem extends Component {
               </div>
               <div className="col">
                 <input className="inputs" type="number" onChange={(event)=>this.setChange(event, change.name)} value={this.state[change.name]} />
+              </div>
+              <div className="col">
+                <button onClick={(event)=>this.addQty(event, change.id)}>Add to Total</button>
               </div>
               <div className="col">
                 <button onClick={(event)=>this.reset(event, change.id)}>Reset</button>
