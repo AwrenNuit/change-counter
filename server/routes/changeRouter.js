@@ -17,7 +17,7 @@ router.put(`/:name/:id`, (req, res)=>{
   let SQLquery = `UPDATE change SET quantity=$1 WHERE name=$2;`;
   pool.query(SQLquery, [req.params.id, req.params.name])
   .then(result=>{
-    res.send(201);
+    res.sendStatus(201);
   }).catch(error=>{
     console.log('ERROR UPDATING CHANGE ------------------------>', error);
     res.sendStatus(500);
@@ -28,7 +28,7 @@ router.put(`/reset/:id`, (req, res)=>{
   let SQLquery = `UPDATE change SET quantity=0 WHERE id=$1;`;
   pool.query(SQLquery, [req.params.id])
   .then(result=>{
-    res.send(201);
+    res.sendStatus(201);
   }).catch(error=>{
     console.log('ERROR RESETTING THIS CHANGE ------------------------>', error);
     res.sendStatus(500);
@@ -39,7 +39,7 @@ router.put(`/reset`, (req, res)=>{
   let SQLquery = `UPDATE change SET quantity=0;`;
   pool.query(SQLquery)
   .then(result=>{
-    res.send(201);
+    res.sendStatus(201);
   }).catch(error=>{
     console.log('ERROR RESETTING ALL CHANGE ------------------------>', error);
     res.sendStatus(500);
