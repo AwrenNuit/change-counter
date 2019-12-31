@@ -104,7 +104,7 @@ class ChangeList extends Component {
           </div>
           <button type="submit">Add My Change!</button>
         </form>
-        <p>I have ${this.state.total}</p>
+        <p className="total">I have ${this.state.total}</p>
       </>
     )
   }

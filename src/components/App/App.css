@@ -84,3 +84,8 @@ button {
   font-size: 78px;
   width: 105px;
 }
+
+.total {
+  color: white;
+  font-size: 2.4em;
+}
