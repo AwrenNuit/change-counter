@@ -26,7 +26,7 @@ class ChangeItem extends Component {
 
   // Set state to current input value
   setChange = (event, name) => {
-    if(event.target.value < 0 || !event.target.value){ // isNan still allows non-number inputs - fix this
+    if(event.target.value < 0 || !event.target.value){
       event.target.value = 0;
     }
     else if(event.target.value > 99){
