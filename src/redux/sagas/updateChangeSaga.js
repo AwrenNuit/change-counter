@@ -3,7 +3,6 @@ import {put} from 'redux-saga/effects';
 
 // Update coin/bill count in database
 function* updateChangeSaga(action){
-  console.log('UPDATE saga with:', action.payload);
   try{
     let id = action.payload.id
     let qty = action.payload.qty
