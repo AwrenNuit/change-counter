@@ -12,7 +12,6 @@ class ChangeItem extends Component {
     fiveDollar: 0,
     tenDollar: 0,
     twentyDollar: 0,
-    lastChanged: ''
   }
 
   componentDidMount(){
@@ -21,7 +20,7 @@ class ChangeItem extends Component {
 
   addQty = (event, id) => {
     event.preventDefault();
-    this.sendChange();
+    this.sendChange(id);
   }
 
   // Set state to current input value
@@ -39,8 +38,8 @@ class ChangeItem extends Component {
   }
 
   // Dispatch each update to database
-  sendChange = () => {
-    let dataToSend = {name: this.state.lastChanged, qty: this.state[this.state.lastChanged]};
+  sendChange = (id) => {
+    let dataToSend = {id: id, qty: this.state[this.state.lastChanged]};
     this.props.dispatch({type: `UPDATE_CHANGE`, payload: dataToSend});
   }
 

@@ -12,10 +12,10 @@ router.get(`/`, (req, res)=>{
   });
 });
 
-router.put(`/:name/:id`, (req, res)=>{
+router.put(`/:id/:qty`, (req, res)=>{
   console.log('in UPDATE with:', req.params);
-  let SQLquery = `UPDATE change SET quantity=$1 WHERE name=$2;`;
-  pool.query(SQLquery, [req.params.id, req.params.name])
+  let SQLquery = `UPDATE change SET quantity=$1 WHERE id=$2;`;
+  pool.query(SQLquery, [req.params.qty, req.params.id])
   .then(result=>{
     res.sendStatus(201);
   }).catch(error=>{

@@ -49,12 +49,13 @@ function* resetQtySaga(action){
   }
 }
 
+// Update coin/bill count in database
 function* updateChangeSaga(action){
   console.log('UPDATE saga with:', action.payload);
   try{
-    let name = action.payload.name
+    let id = action.payload.id
     let qty = action.payload.qty
-    yield axios.put(`/change/${name}/${qty}`);
+    yield axios.put(`/change/${id}/${qty}`);
     yield put({type: `GET_CHANGE`});
   }
   catch(error){
