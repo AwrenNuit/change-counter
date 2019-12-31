@@ -47,8 +47,6 @@ class ChangeItem extends Component {
   render(){
     return(
       <>
-      {JSON.stringify(this.state)}
-
         {this.props.reduxState.map((change, i)=>
           <div key={i}>
             <div className="row">
