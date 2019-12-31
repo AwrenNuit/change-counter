@@ -1,5 +1,11 @@
-.App {
-  text-align: center;
+body {
+  background-color: green;
+}
+
+button {
+  background-color: greenyellow;
+  font-size: 1.2em;
+  height: 50px;
 }
 
 .App-header {
@@ -13,10 +19,6 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
 .coin {
   text-align: center;
   background-color: white;
@@ -24,8 +26,6 @@
   background-size: cover;
   width: 100px;
   height: 100px;
-  border: 2px solid black;
-  /* box-shadow: 10px 10px 5px #666; */
 }
 
 .bill {
@@ -35,8 +35,6 @@
   background-size: cover;
   width: 240px;
   height: 100px;
-  border: 2px solid black;
-  /* box-shadow: 10px 10px 5px #666; */
 }
 
 .main-div {
@@ -50,8 +48,11 @@
 .row {
   display: flex;
   width: 100%;
+  margin-bottom: 30px;
   height: 120px;
-  width: 508px;
+  width: 525px;
+  box-shadow: 5px 5px 5px silver;
+  background-color: white;
 }
 
 .col {
@@ -63,7 +64,7 @@
   width: 250px;
   text-align: center;
   align-items: center;
-  border: 5px solid black;
+  justify-content: center;
 }
 
 .dbl-col {
@@ -75,7 +76,6 @@
   width: 250px;
   text-align: center;
   align-items: center;
-  border: 5px solid black;
 }
 
 .inputs {
