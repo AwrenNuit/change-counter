@@ -18,14 +18,15 @@ class ChangeItem extends Component {
     this.props.dispatch({type: `GET_CHANGE`});
   }
 
-  addQty = (event, id) => {
+  // Dispatch individual change to Saga
+  addQty = (event, id, name) => {
     event.preventDefault();
-    this.sendChange(id);
+    this.sendChange(id, name);
   }
 
   // Set state to current input value
   setChange = (event, name) => {
-    if(event.target.value < 0 || isNaN(event.target.value)){ // isNan still allows non-number inputs - fix this
+    if(event.target.value < 0 || !event.target.value){ // isNan still allows non-number inputs - fix this
       event.target.value = 0;
     }
     else if(event.target.value > 99){
@@ -38,8 +39,8 @@ class ChangeItem extends Component {
   }
 
   // Dispatch each update to database
-  sendChange = (id) => {
-    let dataToSend = {id: id, qty: this.state[this.state.lastChanged]};
+  sendChange = (id, name) => {
+    let dataToSend = {id: id, qty: this.state[name]};
     this.props.dispatch({type: `UPDATE_CHANGE`, payload: dataToSend});
   }
 
@@ -64,7 +65,7 @@ class ChangeItem extends Component {
                 <input className="inputs" type="number" onChange={(event)=>this.setChange(event, change.name)} value={this.state[change.name]} />
               </div>
               <div className="col">
-                <button onClick={(event)=>this.addQty(event, change.id)}>Add to Total</button>
+                <button onClick={(event)=>this.addQty(event, change.id, change.name)}>Add to Total</button>
               </div>
               <div className="col">
                 <button onClick={(event)=>this.reset(event, change.id)}>Reset</button>
