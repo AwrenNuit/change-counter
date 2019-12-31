@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
-import ChangeItem from '../ChangeItem/ChangeItem';
 import {connect} from 'react-redux';
 
-class ChangereduxState extends Component {
+class ChangeList extends Component {
 
   state = {
+    penny: 0,
+    nickel: 0,
+    dime: 0,
+    quarter: 0,
+    oneDollar: 0,
+    fiveDollar: 0,
+    tenDollar: 0,
+    twentyDollar: 0,
     total: 0
   }
 
+  componentDidMount(){
+    this.props.dispatch({type: `GET_CHANGE`});
+  }
+
   // Add all change together, fix to second decimal
-  addChange = () =>{
+  addChange = () => {
     let amount = 0;
     amount += this.props.reduxState[0].quantity * .01
     amount += this.props.reduxState[1].quantity * .05
@@ -19,16 +30,55 @@ class ChangereduxState extends Component {
     amount += this.props.reduxState[5].quantity * 5
     amount += this.props.reduxState[6].quantity * 10
     amount += this.props.reduxState[7].quantity * 20
-    this.setState({
-      total: amount.toFixed(2)
-    })
+    this.resetInputsAndCalculateTotal(amount);
+  }
+
+  // Dispatch individual change to Saga
+  addQty = (event, id, name) => {
+    event.preventDefault();
+    this.sendChange(id, name);
   }
 
   // Display total change, reset all input values
-  displayTotal = (event) =>{
+  displayTotal = (event) => {
     event.preventDefault();
     this.addChange();
     this.props.dispatch({type: `RESET_ALL_QTY`});
+  }
+
+  // Reset coin/bill input values, calculate total
+  resetInputsAndCalculateTotal = (amount) => {
+    this.setState({
+      penny: 0,
+      nickel: 0,
+      dime: 0,
+      quarter: 0,
+      oneDollar: 0,
+      fiveDollar: 0,
+      tenDollar: 0,
+      twentyDollar: 0,
+      total: amount.toFixed(2)
+    });
+  }
+
+  // Dispatch each update to database
+  sendChange = (id, name) => {
+    let dataToSend = {id: id, qty: this.state[name]};
+    this.props.dispatch({type: `UPDATE_CHANGE`, payload: dataToSend});
+  }
+
+  // Set state to current input value
+  setChange = (event, name) => {
+    if(event.target.value < 0 || !event.target.value){
+      event.target.value = 0;
+    }
+    else if(event.target.value > 99){
+      event.target.value = 99;
+    }
+    this.setState({
+      [name]: +event.target.value,
+      lastChanged: name
+    });
   }
 
   render(){
@@ -36,7 +86,21 @@ class ChangereduxState extends Component {
       <>
         <form onSubmit={(event)=>this.displayTotal(event)}>
           <div className="main-div">
-            <ChangeItem />
+            {this.props.reduxState.map((change, i)=>
+              <div key={i}>
+                <div className="row">
+                  <div className="dbl-col">
+                    <div className={change.class} style={{backgroundImage: `url(${change.path})`}}></div>
+                  </div>
+                  <div className="col">
+                    <input className="inputs" type="number" onChange={(event)=>this.setChange(event, change.name)} value={this.state[change.name]} />
+                  </div>
+                  <div className="col">
+                    <button onClick={(event)=>this.addQty(event, change.id, change.name)}>Add to Total</button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <button type="submit">Add My Change!</button>
         </form>
@@ -50,4 +114,4 @@ const putReduxStateOnProps = (reduxState)=>({
   reduxState: reduxState.changeReducer
 });
 
-export default connect(putReduxStateOnProps)(ChangereduxState);
+export default connect(putReduxStateOnProps)(ChangeList);
