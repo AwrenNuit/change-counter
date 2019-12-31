@@ -13,7 +13,6 @@ import {put, takeEvery} from 'redux-saga/effects';
 function* watcherSaga(){
   yield takeEvery(`GET_CHANGE`, getChangeSaga);
   yield takeEvery(`RESET_ALL_QTY`, resetAllQtySaga);
-  yield takeEvery(`RESET_QTY`, resetQtySaga);
   yield takeEvery(`UPDATE_CHANGE`, updateChangeSaga);
 }
 
@@ -35,17 +34,6 @@ function* resetAllQtySaga(){
     yield put({type: `GET_CHANGE`});
   } catch (error) {
     console.log('Error resetting all quantities:', error);
-  }
-}
-
-// Reset individual coin/bill quantity
-function* resetQtySaga(action){
-  try {
-    let id = action.payload;
-    yield axios.put(`/change/reset/${id}`);
-    yield put({type: `GET_CHANGE`});
-  } catch (error) {
-    console.log('Error resetting quantity:', error);
   }
 }
 

@@ -33,7 +33,7 @@ class ChangeItem extends Component {
       event.target.value = 99;
     }
     this.setState({
-      [name]: event.target.value,
+      [name]: +event.target.value,
       lastChanged: name
     });
   }
@@ -42,12 +42,6 @@ class ChangeItem extends Component {
   sendChange = (id, name) => {
     let dataToSend = {id: id, qty: this.state[name]};
     this.props.dispatch({type: `UPDATE_CHANGE`, payload: dataToSend});
-  }
-
-  // Reset individual input value
-  reset = (event, id) => {
-    event.preventDefault();
-    this.props.dispatch({type: `RESET_QTY`, payload: id});
   }
 
   render(){
@@ -66,9 +60,6 @@ class ChangeItem extends Component {
               </div>
               <div className="col">
                 <button onClick={(event)=>this.addQty(event, change.id, change.name)}>Add to Total</button>
-              </div>
-              <div className="col">
-                <button onClick={(event)=>this.reset(event, change.id)}>Reset</button>
               </div>
             </div>
           </div>
