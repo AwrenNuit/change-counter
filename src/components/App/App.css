@@ -9,6 +9,10 @@ button {
   height: 50px;
 }
 
+.App {
+  margin-top: 25px;
+}
+
 .App-header {
   background-color: #282c34;
   height: 100px;
