@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../App/App.css';
-// import Header from '../Header/Header';
 import ChangeList from '../ChangeList/ChangeList';
 
 class App extends Component {
@@ -9,7 +8,6 @@ class App extends Component {
     return (
       <>
         <div className="App">
-          {/* <Header /> */}
           <ChangeList />
         </div>
       </>

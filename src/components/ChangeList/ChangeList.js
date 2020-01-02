@@ -19,18 +19,9 @@ class ChangeList extends Component {
     this.props.dispatch({type: `GET_CHANGE`});
   }
 
-  // Add all change together, fix to second decimal
+  // Add all change together, fix to second decimal, reset state values
   addChange = () => {
-    let amount = 0;
-    // amount += this.props.reduxState[0].quantity * .01
-    // amount += this.props.reduxState[1].quantity * .05
-    // amount += this.props.reduxState[2].quantity * .1
-    // amount += this.props.reduxState[3].quantity * .25
-    // amount += this.props.reduxState[4].quantity * 1
-    // amount += this.props.reduxState[5].quantity * 5
-    // amount += this.props.reduxState[6].quantity * 10
-    // amount += this.props.reduxState[7].quantity * 20
-    
+    let amount = 0;    
     amount += this.state.penny * .01
     amount += this.state.nickel * .05
     amount += this.state.dime * .1
@@ -42,17 +33,10 @@ class ChangeList extends Component {
     this.resetInputsAndCalculateTotal(amount);
   }
 
-  // Dispatch individual change to Saga
-  // addQty = (event, id, name) => {
-  //   event.preventDefault();
-  //   this.sendChange(id, name);
-  // }
-
-  // Display total change, reset all input values
+  // Display total change
   displayTotal = (event) => {
     event.preventDefault();
     this.addChange();
-    // this.props.dispatch({type: `RESET_ALL_QTY`});
   }
 
   // Reset coin/bill input values, calculate total
@@ -69,12 +53,6 @@ class ChangeList extends Component {
       total: amount.toFixed(2)
     });
   }
-
-  // Dispatch each update to database
-  // sendChange = (id, name) => {
-  //   let dataToSend = {id: id, qty: this.state[name]};
-  //   this.props.dispatch({type: `UPDATE_CHANGE`, payload: dataToSend});
-  // }
 
   // Set state to current input value
   setChange = (event, name) => {
@@ -104,9 +82,6 @@ class ChangeList extends Component {
                   <div className="col">
                     <input className="inputs" type="number" onChange={(event)=>this.setChange(event, change.name)} value={this.state[change.name]} />
                   </div>
-                  {/* <div className="col">
-                    <button onClick={(event)=>this.addQty(event, change.id, change.name)}>Add to Total</button>
-                  </div> */}
                 </div>
               </div>
             )}
