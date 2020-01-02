@@ -4,25 +4,17 @@ body {
 }
 
 button {
-  background-color: greenyellow;
+  background-color: #FFCC00;
   font-size: 1.2em;
   height: 50px;
 }
 
-.App {
-  margin-top: 25px;
+button:active {
+  background-color: greenyellow;
 }
 
-.App-header {
-  background-color: #282c34;
-  height: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  margin-bottom: 25px;
+.App {
+  margin-top: 25px;
 }
 
 .coin {
@@ -56,8 +48,8 @@ button {
   width: 100%;
   margin-bottom: 30px;
   height: 120px;
-  width: 525px;
-  box-shadow: 5px 5px 5px silver;
+  width: 400px;
+  box-shadow: 5px 5px 10px black;
   background-color: white;
 }
 
