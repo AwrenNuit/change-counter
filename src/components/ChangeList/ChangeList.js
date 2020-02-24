@@ -73,7 +73,7 @@ class ChangeList extends Component {
       <>
         <form onSubmit={this.displayTotal}>
           <div className="main-div">
-            {this.props.reduxState.map(change=>
+            {this.props.change.map(change=>
               <div key={change.id}>
                 <div className="row">
                   <div className="dbl-col">
@@ -94,8 +94,8 @@ class ChangeList extends Component {
   }
 }
 
-const putReduxStateOnProps = (reduxState)=>({
-  reduxState: reduxState.changeReducer
+const mapRedux = state => ({
+  change: state.changeReducer
 });
 
-export default connect(putReduxStateOnProps)(ChangeList);
+export default connect(mapRedux)(ChangeList);
