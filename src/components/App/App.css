@@ -1,5 +1,5 @@
 body {
-  background-color: green;
+  background-color: #2c7873;
   text-align: center;
 }
 
@@ -11,10 +11,6 @@ button {
 
 button:active {
   background-color: greenyellow;
-}
-
-.App {
-  margin-top: 25px;
 }
 
 .coin {
