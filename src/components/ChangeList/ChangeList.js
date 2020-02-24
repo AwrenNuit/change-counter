@@ -34,13 +34,13 @@ class ChangeList extends Component {
   }
 
   // Display total change
-  displayTotal = (event) => {
-    event.preventDefault();
+  displayTotal = e => {
+    e.preventDefault();
     this.addChange();
   }
 
   // Reset coin/bill input values, calculate total
-  resetInputsAndCalculateTotal = (amount) => {
+  resetInputsAndCalculateTotal = amount => {
     this.setState({
       penny: 0,
       nickel: 0,
@@ -71,16 +71,16 @@ class ChangeList extends Component {
   render(){
     return (
       <>
-        <form onSubmit={(event)=>this.displayTotal(event)}>
+        <form onSubmit={this.displayTotal}>
           <div className="main-div">
-            {this.props.reduxState.map((change, i)=>
-              <div key={i}>
+            {this.props.reduxState.map(change=>
+              <div key={change.id}>
                 <div className="row">
                   <div className="dbl-col">
                     <div className={change.class} style={{backgroundImage: `url(${change.path})`}}></div>
                   </div>
                   <div className="col">
-                    <input className="inputs" type="number" onChange={(event)=>this.setChange(event, change.name)} value={this.state[change.name]} />
+                    <input className="inputs" type="number" onChange={(e)=>this.setChange(e, change.name)} value={this.state[change.name]} />
                   </div>
                 </div>
               </div>
