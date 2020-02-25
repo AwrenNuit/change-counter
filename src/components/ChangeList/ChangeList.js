@@ -4,14 +4,14 @@ import {connect} from 'react-redux';
 class ChangeList extends Component {
 
   state = {
-    penny: 0,
-    nickel: 0,
-    dime: 0,
-    quarter: 0,
-    oneDollar: 0,
-    fiveDollar: 0,
-    tenDollar: 0,
-    twentyDollar: 0,
+    penny: '',
+    nickel: '',
+    dime: '',
+    quarter: '',
+    oneDollar: '',
+    fiveDollar: '',
+    tenDollar: '',
+    twentyDollar: '',
     total: 0
   }
 
@@ -42,29 +42,28 @@ class ChangeList extends Component {
   // Reset coin/bill input values, calculate total
   resetInputsAndCalculateTotal = amount => {
     this.setState({
-      penny: 0,
-      nickel: 0,
-      dime: 0,
-      quarter: 0,
-      oneDollar: 0,
-      fiveDollar: 0,
-      tenDollar: 0,
-      twentyDollar: 0,
+      penny: '',
+      nickel: '',
+      dime: '',
+      quarter: '',
+      oneDollar: '',
+      fiveDollar: '',
+      tenDollar: '',
+      twentyDollar: '',
       total: amount.toFixed(2)
     });
   }
 
   // Set state to current input value
-  setChange = (event, name) => {
-    if(event.target.value < 0 || !event.target.value){
-      event.target.value = 0;
+  setChange = (e, name) => {
+    if(e.target.value < 0){
+      e.target.value = 0;
     }
-    else if(event.target.value > 99){
-      event.target.value = 99;
+    else if(e.target.value > 99){
+      e.target.value = 99;
     }
     this.setState({
-      [name]: +event.target.value,
-      lastChanged: name
+      [name]: +e.target.value
     });
   }
 
