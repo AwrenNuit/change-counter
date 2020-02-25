@@ -5,13 +5,13 @@ body {
 }
 
 button {
-  background-color: #FFCC00;
+  background-color: #ffba5a;
   font-size: 1.2em;
   height: 50px;
 }
 
 button:active {
-  background-color: greenyellow;
+  background-color: #e6a851;
 }
 
 .coin {
